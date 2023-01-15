@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { FilterLabel, FilterInput } from './filter.styled';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateFilter } from '../../redux/filtersSlice';
+import { selectFilter } from '../../redux/selectors';
 
 export default function Filter() {
-  const filter = useSelector(state => state.filter);
+  const filter = useSelector(selectFilter);
   const dispatch = useDispatch();
 
   const changeFilter = event => {

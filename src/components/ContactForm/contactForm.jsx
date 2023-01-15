@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { Form, FormLabel, FormInput } from './contactForm.styled';
 import Button from '../Button/button';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from '../../redux/contactsSlice';
-import { nanoid } from 'nanoid';
+import { addContact } from '../../redux/operations';
 import { Notify } from 'notiflix';
+import { selectContacts } from '../../redux/selectors';
 
 Notify.init({ position: 'center-top' });
 
@@ -13,9 +13,11 @@ export default function ContactForm() {
   const [number, setNumber] = useState('');
   const dispatch = useDispatch();
 
-  const contacts = useSelector(state => state.contacts);
+  // console.log(selectContacts);
+  const contacts = useSelector(selectContacts);
+
   const handleChange = event => {
-    const { name, value } = event.currentTarget;
+    const { name, value } = event.target;
     switch (name) {
       case 'name':
         setName(value);
@@ -35,6 +37,7 @@ export default function ContactForm() {
     setNumber('');
   };
   const handleChekUnique = name => {
+    // console.log(contacts);
     const isExistContact = !!contacts.find(
       contact => contact.name.toLowerCase() === name.toLowerCase()
     );
@@ -45,7 +48,7 @@ export default function ContactForm() {
   const handleAddContact = event => {
     event.preventDefault();
     if (handleChekUnique(name)) {
-      dispatch(addContact({ id: nanoid(), name, number }));
+      dispatch(addContact({ name, number }));
       resetForm();
     }
   };

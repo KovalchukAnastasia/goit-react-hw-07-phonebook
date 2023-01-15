@@ -1,10 +1,16 @@
 import styled from 'styled-components';
 
 export const Phonebook = styled.div`
-  min-width: 320px;
-  color: black;
-  padding: 20px;
+  text-align: left;
+  max-width: 500px;
+  width: 100%;
+  margin: auto;
+  border: solid 1px black;
+  background-color: white;
+  filter: drop-shadow(2px 4px 6px black);
+  padding: 25px;
   border-radius: 5px;
+  margin: 50px auto;
 `;
 
 export const MainTitle = styled.h1`
